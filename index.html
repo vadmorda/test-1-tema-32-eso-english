@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Test 1 - Agricultural and Commercial Expansion</title>
+<title>Single Test - Trade, Craftsmanship and Urban Life</title>
 <style>
+/* (STYLES KEPT EXACTLY AS ORIGINAL) */
     * { box-sizing: border-box; }
-
     body {
         margin: 0;
         padding: 0;
@@ -21,13 +21,11 @@
                     #020617;
         color: #0f172a;
     }
-
     .shell {
         width: 100%;
         max-width: 900px;
         padding: 20px;
     }
-
     .card {
         position: relative;
         background: rgba(15, 23, 42, 0.82);
@@ -39,7 +37,6 @@
         color: #e5e7eb;
         overflow: hidden;
     }
-
     .card::before {
         content: "";
         position: absolute;
@@ -49,12 +46,7 @@
         opacity: 0.9;
         pointer-events: none;
     }
-
-    .card-inner {
-        position: relative;
-        z-index: 1;
-    }
-
+    .card-inner { position: relative; z-index: 1; }
     h1 {
         margin: 0 0 3px;
         text-align: center;
@@ -63,468 +55,634 @@
         letter-spacing: 0.02em;
         color: #f9fafb;
     }
-
     .tagline {
-        text-align: center;
-        font-size: 0.9rem;
-        color: #9ca3af;
-        margin-bottom: 16px;
+        text-align:center;
+        font-size:0.9rem;
+        color:#9ca3af;
+        margin-bottom:16px;
     }
-
     .pill-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 14px;
-        font-size: 0.8rem;
-        color: #9ca3af;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:8px;
+        margin-bottom:14px;
+        font-size:0.8rem;
+        color:#9ca3af;
     }
-
     .pill {
-        padding: 5px 11px;
-        border-radius: 999px;
-        border: 1px solid rgba(148, 163, 184, 0.6);
-        background: rgba(15, 23, 42, 0.8);
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
+        padding:5px 11px;
+        border-radius:999px;
+        border:1px solid rgba(148,163,184,0.6);
+        background:rgba(15,23,42,0.8);
+        display:inline-flex;
+        align-items:center;
+        gap:6px;
     }
-
     .pill span.dot {
-        display: inline-block;
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: #22c55e;
+        display:inline-block;
+        width:7px;
+        height:7px;
+        border-radius:50%;
+        background:#22c55e;
     }
-
-    .progress-wrap {
-        margin-bottom: 10px;
-    }
+    .progress-wrap { margin-bottom:10px; }
     .progress-bar-bg {
-        width: 100%;
-        height: 9px;
-        border-radius: 999px;
-        background: rgba(15, 23, 42, 0.9);
-        border: 1px solid rgba(55, 65, 81, 0.9);
-        overflow: hidden;
+        width:100%;
+        height:9px;
+        border-radius:999px;
+        background:rgba(15,23,42,0.9);
+        border:1px solid rgba(55,65,81,0.9);
+        overflow:hidden;
     }
     .progress-bar-fill {
-        height: 100%;
-        width: 0%;
-        border-radius: 999px;
-        background: linear-gradient(90deg, #22c55e, #38bdf8, #a855f7);
-        box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
-        transition: width 0.28s ease;
+        height:100%;
+        width:0%;
+        border-radius:999px;
+        background:linear-gradient(90deg,#22c55e,#38bdf8,#a855f7);
+        box-shadow:0 0 8px rgba(56,189,248,0.8);
+        transition:width 0.28s ease;
     }
     .progress-label {
-        margin-top: 4px;
-        font-size: 0.78rem;
-        text-align: right;
-        color: #9ca3af;
+        margin-top:4px;
+        font-size:0.78rem;
+        text-align:right;
+        color:#9ca3af;
     }
-
-    .question-block {
-        margin-top: 12px;
+    .question-block { margin-top:12px; }
+    .question-text { 
+        margin-bottom:12px;
+        font-size:1.02rem;
+        font-weight:600;
+        color:#e5e7eb;
     }
-
-    .question-text {
-        margin-bottom: 12px;
-    }
-    .q-es {
-        display: block;
-        font-size: 1.02rem;
-        font-weight: 600;
-        color: #e5e7eb;
-        margin-bottom: 3px;
-    }
-    .q-ua {
-        display: block;
-        font-size: 0.94rem;
-        font-style: italic;
-        color: #cbd5f5;
-        opacity: 0.9;
-    }
-
-    .options {
-        margin-top: 10px;
-    }
-
+    .options { margin-top:10px; }
     .option {
-        border-radius: 14px;
-        border: 1px solid rgba(148, 163, 184, 0.5);
-        padding: 9px 11px 8px;
-        margin-bottom: 8px;
-        display: flex;
-        align-items: flex-start;
-        gap: 8px;
-        cursor: pointer;
-        background: radial-gradient(circle at 0 0, rgba(148, 163, 184, 0.18), transparent 60%);
-        transition: border-color 0.15s ease, transform 0.05s ease, background 0.15s ease;
+        border-radius:14px;
+        border:1px solid rgba(148,163,184,0.5);
+        padding:9px 11px 8px;
+        margin-bottom:8px;
+        display:flex;
+        align-items:flex-start;
+        gap:8px;
+        cursor:pointer;
+        background:radial-gradient(circle at 0 0,rgba(148,163,184,0.18),transparent 60%);
+        transition:border-color 0.15s ease,transform 0.05s ease,background 0.15s ease;
     }
     .option:hover {
-        border-color: #38bdf8;
-        transform: translateY(-1px);
-        background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.22), transparent 65%);
+        border-color:#38bdf8;
+        transform:translateY(-1px);
+        background:radial-gradient(circle at 0 0,rgba(56,189,248,0.22),transparent 65%);
     }
     .option input {
-        margin-top: 4px;
-        accent-color: #38bdf8;
-        cursor: pointer;
+        margin-top:4px;
+        accent-color:#38bdf8;
+        cursor:pointer;
     }
-    .option-text {
-        font-size: 0.95rem;
-        color: #e5e7eb;
-    }
-    .option-text .es {
-        display: block;
-        font-weight: 500;
-    }
-    .option-text .ua {
-        display: block;
-        font-size: 0.9rem;
-        font-style: italic;
-        color: #cbd5f5;
-        opacity: 0.95;
-        margin-top: 2px;
-    }
-
+    .option-text { font-size:0.95rem; color:#e5e7eb; }
     .short-answer {
-        width: 100%;
-        margin-top: 8px;
-        padding: 10px 12px;
-        border-radius: 14px;
-        border: 1px solid rgba(148, 163, 184, 0.7);
-        background: rgba(15, 23, 42, 0.8);
-        color: #e5e7eb;
-        font-size: 0.97rem;
-        outline: none;
-        transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+        width:100%;
+        margin-top:8px;
+        padding:10px 12px;
+        border-radius:14px;
+        border:1px solid rgba(148,163,184,0.7);
+        background:rgba(15,23,42,0.8);
+        color:#e5e7eb;
+        font-size:0.97rem;
+        outline:none;
+        transition:border-color 0.15s ease,box-shadow 0.15s ease,background 0.15s ease;
     }
-    .short-answer::placeholder {
-        color: #6b7280;
-    }
+    .short-answer::placeholder { color:#6b7280; }
     .short-answer:focus {
-        border-color: #38bdf8;
-        box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.55);
-        background: rgba(15, 23, 42, 0.95);
+        border-color:#38bdf8;
+        box-shadow:0 0 0 1px rgba(56,189,248,0.55);
+        background:rgba(15,23,42,0.95);
     }
-
     .nav-row {
-        margin-top: 18px;
-        display: flex;
-        justify-content: space-between;
-        gap: 8px;
+        margin-top:18px;
+        display:flex;
+        justify-content:space-between;
+        gap:8px;
     }
-
     .btn {
-        border-radius: 999px;
-        border: none;
-        padding: 9px 18px;
-        font-size: 0.92rem;
-        font-weight: 500;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        transition: transform 0.07s ease, box-shadow 0.2s ease, background 0.15s ease, color 0.15s ease;
-        white-space: nowrap;
+        border-radius:999px;
+        border:none;
+        padding:9px 18px;
+        font-size:0.92rem;
+        font-weight:500;
+        cursor:pointer;
+        display:inline-flex;
+        align-items:center;
+        gap:6px;
+        transition:transform 0.07s ease,box-shadow 0.2s ease,background 0.15s ease,color 0.15s ease;
+        white-space:nowrap;
     }
-
     .btn-primary {
-        background: linear-gradient(135deg, #38bdf8, #6366f1);
-        color: #0f172a;
-        box-shadow: 0 14px 30px rgba(56, 189, 248, 0.45);
+        background:linear-gradient(135deg,#38bdf8,#6366f1);
+        color:#0f172a;
+        box-shadow:0 14px 30px rgba(56,189,248,0.45);
     }
     .btn-primary:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 18px 40px rgba(56, 189, 248, 0.6);
-        background: linear-gradient(135deg, #22c55e, #6366f1);
+        transform:translateY(-1px);
+        box-shadow:0 18px 40px rgba(56,189,248,0.6);
+        background:linear-gradient(135deg,#22c55e,#6366f1);
     }
-
     .btn-ghost {
-        background: transparent;
-        color: #e5e7eb;
-        border: 1px solid rgba(148, 163, 184, 0.7);
+        background:transparent;
+        color:#e5e7eb;
+        border:1px solid rgba(148,163,184,0.7);
     }
     .btn-ghost:hover {
-        background: rgba(15, 23, 42, 0.85);
-        transform: translateY(-1px);
+        background:rgba(15,23,42,0.85);
+        transform:translateY(-1px);
     }
-
     .btn:disabled {
-        opacity: 0.4;
-        cursor: default;
-        transform: none;
-        box-shadow: none;
+        opacity:0.4;
+        cursor:default;
+        transform:none;
+        box-shadow:none;
     }
-
     .hint {
-        margin-top: 6px;
-        font-size: 0.78rem;
-        color: #9ca3af;
+        margin-top:6px;
+        font-size:0.78rem;
+        color:#9ca3af;
     }
-
-    .hidden { display: none; }
-
-    #result-card h2 {
-        font-size: 1.3rem;
-    }
-
+    .hidden { display:none; }
+    #result-card h2 { font-size:1.3rem; }
     .summary {
-        margin-top: 10px;
-        font-size: 0.96rem;
-        color: #e5e7eb;
+        margin-top:10px;
+        font-size:0.96rem;
+        color:#e5e7eb;
     }
-
-    .summary strong {
-        color: #a5b4fc;
-    }
-
+    .summary strong { color:#a5b4fc; }
     .list-fails {
-        margin-top: 12px;
-        max-height: 220px;
-        overflow-y: auto;
-        padding-right: 6px;
-        font-size: 0.9rem;
-        color: #e5e7eb;
+        margin-top:12px;
+        max-height:220px;
+        overflow-y:auto;
+        padding-right:6px;
+        font-size:0.9rem;
+        color:#e5e7eb;
     }
-
     .list-fails li {
-        margin-bottom: 8px;
-        padding-bottom: 6px;
-        border-bottom: 1px dashed rgba(148, 163, 184, 0.45);
+        margin-bottom:8px;
+        padding-bottom:6px;
+        border-bottom:1px dashed rgba(148,163,184,0.45);
     }
-
-    .list-fails .es {
-        display: block;
-        font-weight: 500;
-    }
-    .list-fails .ua {
-        display: block;
-        font-style: italic;
-        color: #cbd5f5;
-        margin-top: 2px;
-    }
-
     .retry-row {
-        margin-top: 16px;
-        text-align: center;
+        margin-top:16px;
+        text-align:center;
     }
-
-    @media (max-width: 640px) {
-        .card {
-            padding: 18px 16px 16px;
-            border-radius: 18px;
-        }
-        h1 {
-            font-size: 1.2rem;
-        }
-        .nav-row {
-            flex-direction: column-reverse;
-        }
-        .btn {
-            width: 100%;
-            justify-content: center;
-        }
-        .progress-label {
-            text-align: left;
-        }
+    @media (max-width:640px){
+        .card{padding:18px 16px 16px;border-radius:18px;}
+        h1{font-size:1.2rem;}
+        .nav-row{flex-direction:column-reverse;}
+        .btn{width:100%;justify-content:center;}
+        .progress-label{text-align:left;}
     }
 </style>
 </head>
+
 <body>
 <div class="shell">
 
-    <!-- TEST CARD -->
-    <div id="test-card" class="card">
-        <div class="card-inner">
-            <h1>Test 1 · Agricultural and Commercial Expansion</h1>
-            <div class="tagline">Geography & History · English 🇬🇧 · Ukrainian 🇺🇦</div>
+<!-- TEST CARD -->
+<div id="test-card" class="card">
+<div class="card-inner">
+    <h1>Single Test · Trade, Craftsmanship and Urban Life</h1>
+    <div class="tagline">Unit 3 · Geography & History · 8th Grade (ESO)</div>
 
-            <div class="pill-row">
-                <div class="pill">
-                    <span class="dot"></span>
-                    <span>Block 1 · Agriculture and Trade</span>
-                </div>
-                <div class="pill">
-                    <span>Practice mode</span>
-                </div>
-            </div>
-
-            <div class="progress-wrap">
-                <div class="progress-bar-bg">
-                    <div id="progress-bar" class="progress-bar-fill"></div>
-                </div>
-                <div id="progress-label" class="progress-label"></div>
-            </div>
-
-            <div id="question-container" class="question-block"></div>
+    <div class="pill-row">
+        <div class="pill">
+            <span class="dot"></span>
+            <span>Blocks 1, 2 and 3</span>
+        </div>
+        <div class="pill">
+            <span>Practice mode</span>
         </div>
     </div>
 
-    <!-- RESULTS CARD -->
-    <div id="result-card" class="card hidden">
-        <div class="card-inner" id="result-content"></div>
+    <div class="progress-wrap">
+        <div class="progress-bar-bg">
+            <div id="progress-bar" class="progress-bar-fill"></div>
+        </div>
+        <div id="progress-label" class="progress-label"></div>
     </div>
+
+    <div id="question-container" class="question-block"></div>
+</div>
+</div>
+
+<!-- RESULTS CARD -->
+<div id="result-card" class="card hidden">
+    <div class="card-inner" id="result-content"></div>
+</div>
+
 </div>
 
 <script>
-// -----------------------------
-// QUESTIONS (correct answers distributed)
-// -----------------------------
-const preguntas = [
-    {
-        tipo: "multi",
-        es: "Which tool replaced the Roman plough?",
-        ua: "Який плуг замінив римський плуг?",
-        opciones: [
-            { es: "Iron plough", ua: "Залізний плуг" },
-            { es: "Heavy plough", ua: "Плуг із відвалом" }, // ✔
-            { es: "Three-share plough", ua: "Трипільний плуг" }
-        ],
-        correcta: 1
-    },
-    {
-        tipo: "multi",
-        es: "Which farming system left only one third of the land fallow?",
-        ua: "Яка система залишала лише третину землі під паром?",
-        opciones: [
-            { es: "Fixed fallow", ua: "Постійний пар" },
-            { es: "Three-field rotation", ua: "Трипільна сівозміна" }, // ✔
-            { es: "Four-field rotation", ua: "Чотирипільна сівозміна" }
-        ],
-        correcta: 1
-    },
-    {
-        tipo: "multi",
-        es: "Which crops were introduced by Muslims in the Mediterranean?",
-        ua: "Які культури запровадили мусульмани в Середземномор’ї?",
-        opciones: [
-            { es: "Citrus fruits and rice", ua: "Цитрусові та рис" }, // ✔
-            { es: "Wheat and maize", ua: "Пшениця та кукурудза" },
-            { es: "Vine and olive", ua: "Виноград і олива" }
-        ],
-        correcta: 0
-    },
-    {
-        tipo: "multi",
-        es: "Which invention saved labour?",
-        ua: "Який винахід зменшив потребу в робочій силі?",
-        opciones: [
-            { es: "Grain silos", ua: "Зернові силоси" },
-            { es: "Water and wind mills", ua: "Водяні та вітряні млини" }, // ✔
-            { es: "Double ploughs", ua: "Подвійні плуги" }
-        ],
-        correcta: 1
-    },
-    {
-        tipo: "multi",
-        es: "What increased thanks to agricultural growth?",
-        ua: "Що зросло завдяки розвитку сільського господарства?",
-        opciones: [
-            { es: "Total deforestation", ua: "Повна вирубка лісів" },
-            { es: "The European population", ua: "Населення Європи" }, // ✔
-            { es: "Slavery", ua: "Рабство" }
-        ],
-        correcta: 1
-    },
-    {
-        tipo: "multi",
-        es: "Where did merchants gather?",
-        ua: "Де збиралися купці?",
-        opciones: [
-            { es: "In castles", ua: "У замках" },
-            { es: "In military ports", ua: "У військових портах" },
-            { es: "At fairs", ua: "На ярмарках" } // ✔
-        ],
-        correcta: 2
-    },
-    {
-        tipo: "multi",
-        es: "What gave rise to medieval banking?",
-        ua: "Що стало основою середньовічної банківської справи?",
-        opciones: [
-            { es: "Currency exchange", ua: "Обмін валют" }, // ✔
-            { es: "Taxes", ua: "Податки" },
-            { es: "Three-field rotation", ua: "Трипільна система" }
-        ],
-        correcta: 0
-    },
-    {
-        tipo: "multi",
-        es: "Which document replaced many coin transactions?",
-        ua: "Який документ замінив багато операцій із монетами?",
-        opciones: [
-            { es: "Codices", ua: "Кодекси" },
-            { es: "Feudal charters", ua: "Феодальні грамоти" },
-            { es: "Bills of exchange", ua: "Переказні векселі" } // ✔
-        ],
-        correcta: 2
-    },
-    {
-        tipo: "multi",
-        es: "Which routes were important in medieval trade?",
-        ua: "Які торговельні маршрути були важливими?",
-        opciones: [
-            { es: "Caribbean and Indian Ocean", ua: "Карибський та Індійський" },
-            { es: "Black Sea and Caspian Sea", ua: "Чорне й Каспійське моря" },
-            { es: "Mediterranean and Atlantic–Baltic", ua: "Середземноморський і Атлантично-Балтійський" } // ✔
-        ],
-        correcta: 2
-    },
-    {
-        tipo: "multi",
-        es: "Which activity grew along with the population?",
-        ua: "Яка діяльність зросла разом із населенням?",
-        opciones: [
-            { es: "Craft production", ua: "Ремісниче виробництво" }, // ✔
-            { es: "Mining", ua: "Гірництво" },
-            { es: "Shipbuilding", ua: "Суднобудування" }
-        ],
-        correcta: 0
-    },
+// -------------------------------------------------
+// TRANSLATED QUESTIONS
+// -------------------------------------------------
 
-    // SHORT ANSWERS
+const preguntas = [
+    // ====== TEST 1 – Revival of Trade (15) ======
     {
-        tipo: "corta",
-        es: "Write the name of the new plough.",
-        ua: "Напиши назву нового плуга.",
-        respuesta: "heavy plough"
+        tipo: "multi",
+        texto: "Between which centuries did the revival of trade in Europe take place?",
+        opciones: [
+            "Between the 11th and 13th centuries",
+            "Between the 8th and 9th centuries",
+            "Between the 15th and 16th centuries"
+        ],
+        correcta: 0
+    },
+    {
+        tipo: "multi",
+        texto: "Which factor encouraged the growth of trade?",
+        opciones: [
+            "The decline in agricultural production",
+            "The appearance of agricultural surpluses and population growth",
+            "The prohibition of selling products in markets"
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        texto: "What were medieval fairs?",
+        opciones: [
+            "Periodic meetings where products from many regions were exchanged",
+            "Religious festivals without trade",
+            "Military training grounds"
+        ],
+        correcta: 0
+    },
+    {
+        tipo: "multi",
+        texto: "Which area did the Italian cities such as Venice and Genoa dominate?",
+        opciones: [
+            "Trade in the Mediterranean Sea",
+            "Trade in the Atlantic Ocean",
+            "Trade in the Indian Ocean"
+        ],
+        correcta: 0
+    },
+    {
+        tipo: "multi",
+        texto: "What was the Hanseatic League?",
+        opciones: [
+            "A religious order",
+            "An association of northern European cities to control trade",
+            "An army of mercenaries"
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        texto: "Which product was NOT typical luxury trade in the Middle Ages?",
+        opciones: [
+            "Spices and silks",
+            "Wheat and rye",
+            "Precious stones"
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        texto: "Which instrument allowed payments without carrying large amounts of money?",
+        opciones: [
+            "The bill of exchange",
+            "The water mill",
+            "Parchment"
+        ],
+        correcta: 0
+    },
+    {
+        tipo: "multi",
+        texto: "What was the name of the new urban social class enriched through trade?",
+        opciones: [
+            "The feudal nobility",
+            "The bourgeoisie",
+            "The peasantry"
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        texto: "What activity did wholesale merchants carry out?",
+        opciones: [
+            "They sold their products only in a small neighborhood shop",
+            "They bought and sold large quantities of products between different regions",
+            "They worked as peasants in the countryside"
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        texto: "What consequence did the growth of trade have on cities?",
+        opciones: [
+            "The disappearance of medieval cities",
+            "Urban population and wealth increased",
+            "Fairs and markets were banned"
+        ],
+        correcta: 1
     },
     {
         tipo: "corta",
-        es: "What were the large markets called?",
-        ua: "Як називаються великі ринки?",
+        texto: "Write the name of the large periodic gatherings of merchants.",
         respuesta: "fairs"
     },
     {
         tipo: "corta",
-        es: "Which financial document appeared in the 14th century?",
-        ua: "Який фінансовий документ з’явився у XIV ст.?",
-        respuesta: "bills of exchange"
+        texto: "Write the name of the association of northern European cities that defended their trading interests.",
+        respuesta: "Hanseatic League"
     },
     {
         tipo: "corta",
-        es: "Which farming system had three parts?",
-        ua: "Яка система складалася з трьох частин?",
-        respuesta: "three-field rotation"
+        texto: "Write the name of the document that allowed payments without carrying metal money.",
+        respuesta: "bill of exchange"
     },
     {
         tipo: "corta",
-        es: "Who carried out currency exchange?",
-        ua: "Хто здійснював обмін монет?",
-        respuesta: "money changer"
+        texto: "Write the name of the social group in cities that did not have a joband lived poorly.",
+        respuesta: "bmarginalised"
+    },
+    {
+        tipo: "corta",
+        texto: "Write the name of an Italian city known for Mediterranean trade.",
+        respuesta: "Venice"
+    },
+
+    // ====== TEST 2 – Development of Craftsmanship (15) ======
+    {
+        tipo: "multi",
+        texto: "What was a guild?",
+        opciones: [
+            "A marketplace for craft products",
+            "An association of people with the same trade",
+            "A group of landless peasants"
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        texto: "From which century did demand for craft products grow?",
+        opciones: [
+            "From the 10th century",
+            "From the 13th century",
+            "From the 15th century"
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        texto: "Where were the workshops of a guild usually located?",
+        opciones: [
+            "In neighborhoods separated by wealth",
+            "In the countryside, far from the city",
+            "On the same street, named after the trade"
+        ],
+        correcta: 2
+    },
+    {
+        tipo: "multi",
+        texto: "Who owned the workshop, the tools, and the raw materials?",
+        opciones: [
+            "The master",
+            "The journeyman",
+            "The apprentice"
+        ],
+        correcta: 0
+    },
+    {
+        tipo: "multi",
+        texto: "Which option best describes an apprentice?",
+        opciones: [
+            "A very wealthy master",
+            "An expert worker with a salary",
+            "A young person learning the trade without pay, living in the master’s home"
+        ],
+        correcta: 2
+    },
+    {
+        tipo: "multi",
+        texto: "What did the guild control through the rules of the trade?",
+        opciones: [
+            "Product quality, raw materials, quality and sale price",
+            "The sales and the aid",
+            "Weather and harvests"
+        ],
+        correcta: 0
+    },
+    {
+        tipo: "multi",
+        texto: "Whom did the guild assistance system help?",
+        opciones: [
+            "Only wealthy masters",
+            "The sick, orphans, and widows",
+            "Only poor peasants"
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        texto: "How many levels did the career in the crafts have?",
+        opciones: [
+            "Three: master, journeyman, and apprentice",
+            "Two: master and apprentice",
+            "Four: lord, master, journeyman, apprentice"
+        ],
+        correcta: 0
+    },
+    {
+        tipo: "multi",
+        texto: "What was required to become a master at the end of the 13th century?",
+        opciones: [
+            "A very high payment to the guild",
+            "Having worked only in the countryside",
+            "Producing a very difficult masterpiece"
+        ],
+        correcta: 2
+    },
+    {
+        tipo: "multi",
+        texto: "Which statement about women in guilds is correct?",
+        opciones: [
+            "They were always masters and heads of guilds",
+            "They were rarely admitted, but worked in workshops",
+            "They could never work in craft trades"
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        texto: "How were craft products made, according to the text?",
+        opciones: [
+            "By hand, with few tools, in small workshops",
+            "In large factories with machines",
+            "Only in fields and villages"
+        ],
+        correcta: 0
+    },
+    {
+        tipo: "corta",
+        texto: "Write the name of the association of people with the same trade.",
+        respuesta: "guild"
+    },
+    {
+        tipo: "corta",
+        texto: "What is the name of the workshop owner?",
+        respuesta: "master"
+    },
+    {
+        tipo: "corta",
+        texto: "What is the name of the skilled salaried worker?",
+        respuesta: "journeyman"
+    },
+    {
+        tipo: "corta",
+        texto: "What is the name of the young person learning the trade?",
+        respuesta: "apprentice"
+    },
+    {
+        tipo: "corta",
+        texto: "What was the difficult work required to become a master called?",
+        respuesta: "masterpiece"
+    },
+
+    // ====== TEST 3 – Urban Life in the Middle Ages (15) ======
+    {
+        tipo: "multi",
+        texto: "Between which centuries did the urban revival in Europe take place?",
+        opciones: [
+            "Between the 9th and 10th centuries",
+            "Between the 11th and 13th centuries",
+            "Between the 14th and 15th centuries"
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        texto: "Which was one cause of the growth of cities?",
+        opciones: [
+            "New agricultural techniques required less labor",
+            "Cities banned trade",
+            "Roads were destroyed"
+        ],
+        correcta: 0
+    },
+    {
+        tipo: "multi",
+        texto: "What happened to serfs who lived in a city for more than one year?",
+        opciones: [
+            "They remained serfs",
+            "They became free",
+            "They became nobles"
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        texto: "Medieval cities became centers...",
+        opciones: [
+            "Religious, political, and economic",
+            "Only military",
+            "Only agricultural"
+        ],
+        correcta: 0
+    },
+    {
+        tipo: "multi",
+        texto: "What was a city's charter?",
+        opciones: [
+            "A type of urban tax",
+            "A document granting rights and privileges from the king",
+            "A defensive wall"
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        texto: "What was the name of the city's governing body?",
+        opciones: [
+            "Town council",
+            "European Parliament",
+            "Feudal court"
+        ],
+        correcta: 0
+    },
+    {
+        tipo: "multi",
+        texto: "Who formed the urban elite?",
+        opciones: [
+            "Landless peasants",
+            "Rich merchant families, important craftsmen, and high clergy",
+            "Only students and scribes"
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        texto: "Which mendicant orders emerged in the cities?",
+        opciones: [
+            "Franciscan and Dominican",
+            "Benedictine and Cistercian",
+            "Templar and Hospitaller"
+        ],
+        correcta: 0
+    },
+    {
+        tipo: "multi",
+        texto: "What were the quarters where Jews and Muslims lived called?",
+        opciones: [
+            "Jewish and Muslim quarters",
+            "Castles and villages",
+            "Fields and orchards"
+        ],
+        correcta: 0
+    },
+    {
+        tipo: "multi",
+        texto: "What was the center of urban life?",
+        opciones: [
+            "The market square",
+            "The outer walls",
+            "The cemeteries"
+        ],
+        correcta: 0
+    },
+    {
+        tipo: "corta",
+        texto: "What were the inhabitants of the cities called?",
+        respuesta: "bourgeoisie"
+    },
+    {
+        tipo: "corta",
+        texto: "Write the name of the document that stated a city’s rights.",
+        respuesta: "charter"
+    },
+    {
+        tipo: "corta",
+        texto: "Write the name of the urban governing body (one word).",
+        respuesta: "council"
+    },
+    {
+        tipo: "corta",
+        texto: "Write the name of one mendicant order mentioned in the unit.",
+        respuesta: "Franciscans"
+    },
+    {
+        tipo: "corta",
+        texto: "What were the neighborhoods where Jews lived called?",
+        respuesta: "Jewish quarter"
     }
 ];
 
-// -----------------------------
-// LOGIC: RANDOM ORDER
-// -----------------------------
+// -------------------------------------------------
+// REST OF SCRIPT (unchanged)
+// -------------------------------------------------
+
 let orden = [...preguntas.keys()];
 
-// Fisher-Yates shuffle
 function barajar(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -544,6 +702,14 @@ function actualizarProgreso() {
     label.textContent = `Question ${indice + 1} of ${preguntas.length}`;
 }
 
+function normalizarTexto(str) {
+    return str
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim();
+}
+
 function renderPregunta() {
     const cont = document.getElementById("question-container");
     const idxPregunta = orden[indice];
@@ -553,8 +719,7 @@ function renderPregunta() {
 
     let html = `
         <div class="question-text">
-            <span class="q-es">${q.es}</span>
-            <span class="q-ua">${q.ua}</span>
+            ${q.texto}
         </div>
     `;
 
@@ -567,8 +732,7 @@ function renderPregunta() {
                 <label class="option">
                     <input type="radio" name="resp" value="${iOp}" ${checked}>
                     <div class="option-text">
-                        <span class="es">${op.es}</span>
-                        <span class="ua">${op.ua}</span>
+                        ${op}
                     </div>
                 </label>
             `;
@@ -582,16 +746,16 @@ function renderPregunta() {
                 class="short-answer"
                 type="text"
                 value="${valor}"
-                placeholder="Write your answer · Напиши відповідь"
+                placeholder="Write your answer"
             >
-            <div class="hint">1–2 words are enough · 1–2 слова достатньо</div>
+            <div class="hint">1–2 words are enough</div>
         `;
     }
 
     html += `
         <div class="nav-row">
             <button class="btn btn-ghost" onclick="anterior()" ${indice === 0 ? "disabled" : ""}>
-                ◀ Back
+                ◀ Previous
             </button>
             <button class="btn btn-primary" onclick="siguiente()">
                 ${indice === preguntas.length - 1 ? "Finish test" : "Next ▶"}
@@ -660,10 +824,13 @@ function mostrarResultados() {
             if (resp === q.correcta) correctas++;
             else fallos.push(q);
         } else {
-            const esperado = q.respuesta.toLowerCase().trim();
-            const dado = String(resp).toLowerCase().trim();
-            if (dado === esperado) correctas++;
-            else fallos.push(q);
+            const esperado = normalizarTexto(q.respuesta);
+            const dado = normalizarTexto(String(resp));
+            if (dado === esperado) {
+                correctas++;
+            } else {
+                fallos.push(q);
+            }
         }
     });
 
@@ -673,8 +840,8 @@ function mostrarResultados() {
     let html = `
         <h2>Test results</h2>
         <div class="summary">
-            ✅ Correct: <strong>${correctas}</strong><br>
-            ❌ Incorrect: <strong>${errores}</strong>
+            ✅ Correct answers: <strong>${correctas}</strong><br>
+            ❌ Mistakes: <strong>${errores}</strong>
         </div>
     `;
 
@@ -687,8 +854,7 @@ function mostrarResultados() {
         fallos.forEach(q => {
             html += `
                 <li>
-                    <span class="es">${q.es}</span>
-                    <span class="ua">${q.ua}</span>
+                    ${q.texto}
                 </li>
             `;
         });
@@ -706,8 +872,9 @@ function mostrarResultados() {
     resultContent.innerHTML = html;
 }
 
-// Start
 renderPregunta();
 </script>
+
 </body>
 </html>
+
