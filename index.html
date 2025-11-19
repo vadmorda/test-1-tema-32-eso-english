@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Test 1 - Agricultural and Commercial Expansion</title>
+<style>
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+            "Segoe UI", Arial, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at 0% 0%, #38bdf8 0, transparent 45%),
+                    radial-gradient(circle at 100% 100%, #a855f7 0, transparent 45%),
+                    radial-gradient(circle at 0% 100%, #22c55e 0, transparent 40%),
+                    #020617;
+        color: #0f172a;
+    }
+
+    .shell {
+        width: 100%;
+        max-width: 900px;
+        padding: 20px;
+    }
+
+    .card {
+        position: relative;
+        background: rgba(15, 23, 42, 0.82);
+        border-radius: 24px;
+        padding: 24px 26px 22px;
+        box-shadow: 0 22px 60px rgba(15, 23, 42, 0.8);
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        backdrop-filter: blur(18px);
+        color: #e5e7eb;
+        overflow: hidden;
+    }
+
+    .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.18), transparent 55%),
+                    radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.18), transparent 55%);
+        opacity: 0.9;
+        pointer-events: none;
+    }
+
+    .card-inner {
+        position: relative;
+        z-index: 1;
+    }
+
+    h1 {
+        margin: 0 0 3px;
+        text-align: center;
+        font-size: 1.45rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        color: #f9fafb;
+    }
+
+    .tagline {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #9ca3af;
+        margin-bottom: 16px;
+    }
+
+    .pill-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 14px;
+        font-size: 0.8rem;
+        color: #9ca3af;
+    }
+
+    .pill {
+        padding: 5px 11px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.6);
+        background: rgba(15, 23, 42, 0.8);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .pill span.dot {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #22c55e;
+    }
+
+    .progress-wrap {
+        margin-bottom: 10px;
+    }
+    .progress-bar-bg {
+        width: 100%;
+        height: 9px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(55, 65, 81, 0.9);
+        overflow: hidden;
+    }
+    .progress-bar-fill {
+        height: 100%;
+        width: 0%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #22c55e, #38bdf8, #a855f7);
+        box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+        transition: width 0.28s ease;
+    }
+    .progress-label {
+        margin-top: 4px;
+        font-size: 0.78rem;
+        text-align: right;
+        color: #9ca3af;
+    }
+
+    .question-block {
+        margin-top: 12px;
+    }
+
+    .question-text {
+        margin-bottom: 12px;
+    }
+    .q-es {
+        display: block;
+        font-size: 1.02rem;
+        font-weight: 600;
+        color: #e5e7eb;
+        margin-bottom: 3px;
+    }
+    .q-ua {
+        display: block;
+        font-size: 0.94rem;
+        font-style: italic;
+        color: #cbd5f5;
+        opacity: 0.9;
+    }
+
+    .options {
+        margin-top: 10px;
+    }
+
+    .option {
+        border-radius: 14px;
+        border: 1px solid rgba(148, 163, 184, 0.5);
+        padding: 9px 11px 8px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        cursor: pointer;
+        background: radial-gradient(circle at 0 0, rgba(148, 163, 184, 0.18), transparent 60%);
+        transition: border-color 0.15s ease, transform 0.05s ease, background 0.15s ease;
+    }
+    .option:hover {
+        border-color: #38bdf8;
+        transform: translateY(-1px);
+        background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.22), transparent 65%);
+    }
+    .option input {
+        margin-top: 4px;
+        accent-color: #38bdf8;
+        cursor: pointer;
+    }
+    .option-text {
+        font-size: 0.95rem;
+        color: #e5e7eb;
+    }
+    .option-text .es {
+        display: block;
+        font-weight: 500;
+    }
+    .option-text .ua {
+        display: block;
+        font-size: 0.9rem;
+        font-style: italic;
+        color: #cbd5f5;
+        opacity: 0.95;
+        margin-top: 2px;
+    }
+
+    .short-answer {
+        width: 100%;
+        margin-top: 8px;
+        padding: 10px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(148, 163, 184, 0.7);
+        background: rgba(15, 23, 42, 0.8);
+        color: #e5e7eb;
+        font-size: 0.97rem;
+        outline: none;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    .short-answer::placeholder {
+        color: #6b7280;
+    }
+    .short-answer:focus {
+        border-color: #38bdf8;
+        box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.55);
+        background: rgba(15, 23, 42, 0.95);
+    }
+
+    .nav-row {
+        margin-top: 18px;
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .btn {
+        border-radius: 999px;
+        border: none;
+        padding: 9px 18px;
+        font-size: 0.92rem;
+        font-weight: 500;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: transform 0.07s ease, box-shadow 0.2s ease, background 0.15s ease, color 0.15s ease;
+        white-space: nowrap;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #38bdf8, #6366f1);
+        color: #0f172a;
+        box-shadow: 0 14px 30px rgba(56, 189, 248, 0.45);
+    }
+    .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 18px 40px rgba(56, 189, 248, 0.6);
+        background: linear-gradient(135deg, #22c55e, #6366f1);
+    }
+
+    .btn-ghost {
+        background: transparent;
+        color: #e5e7eb;
+        border: 1px solid rgba(148, 163, 184, 0.7);
+    }
+    .btn-ghost:hover {
+        background: rgba(15, 23, 42, 0.85);
+        transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+        opacity: 0.4;
+        cursor: default;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .hint {
+        margin-top: 6px;
+        font-size: 0.78rem;
+        color: #9ca3af;
+    }
+
+    .hidden { display: none; }
+
+    #result-card h2 {
+        font-size: 1.3rem;
+    }
+
+    .summary {
+        margin-top: 10px;
+        font-size: 0.96rem;
+        color: #e5e7eb;
+    }
+
+    .summary strong {
+        color: #a5b4fc;
+    }
+
+    .list-fails {
+        margin-top: 12px;
+        max-height: 220px;
+        overflow-y: auto;
+        padding-right: 6px;
+        font-size: 0.9rem;
+        color: #e5e7eb;
+    }
+
+    .list-fails li {
+        margin-bottom: 8px;
+        padding-bottom: 6px;
+        border-bottom: 1px dashed rgba(148, 163, 184, 0.45);
+    }
+
+    .list-fails .es {
+        display: block;
+        font-weight: 500;
+    }
+    .list-fails .ua {
+        display: block;
+        font-style: italic;
+        color: #cbd5f5;
+        margin-top: 2px;
+    }
+
+    .retry-row {
+        margin-top: 16px;
+        text-align: center;
+    }
+
+    @media (max-width: 640px) {
+        .card {
+            padding: 18px 16px 16px;
+            border-radius: 18px;
+        }
+        h1 {
+            font-size: 1.2rem;
+        }
+        .nav-row {
+            flex-direction: column-reverse;
+        }
+        .btn {
+            width: 100%;
+            justify-content: center;
+        }
+        .progress-label {
+            text-align: left;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="shell">
+
+    <!-- TEST CARD -->
+    <div id="test-card" class="card">
+        <div class="card-inner">
+            <h1>Test 1 · Agricultural and Commercial Expansion</h1>
+            <div class="tagline">Geography & History · English 🇬🇧 · Ukrainian 🇺🇦</div>
+
+            <div class="pill-row">
+                <div class="pill">
+                    <span class="dot"></span>
+                    <span>Block 1 · Agriculture and Trade</span>
+                </div>
+                <div class="pill">
+                    <span>Practice mode</span>
+                </div>
+            </div>
+
+            <div class="progress-wrap">
+                <div class="progress-bar-bg">
+                    <div id="progress-bar" class="progress-bar-fill"></div>
+                </div>
+                <div id="progress-label" class="progress-label"></div>
+            </div>
+
+            <div id="question-container" class="question-block"></div>
+        </div>
+    </div>
+
+    <!-- RESULTS CARD -->
+    <div id="result-card" class="card hidden">
+        <div class="card-inner" id="result-content"></div>
+    </div>
+</div>
+
+<script>
+// -----------------------------
+// QUESTIONS (correct answers distributed)
+// -----------------------------
+const preguntas = [
+    {
+        tipo: "multi",
+        es: "Which tool replaced the Roman plough?",
+        ua: "Який плуг замінив римський плуг?",
+        opciones: [
+            { es: "Iron plough", ua: "Залізний плуг" },
+            { es: "Mouldboard plough", ua: "Плуг із відвалом" }, // ✔
+            { es: "Three-share plough", ua: "Трипільний плуг" }
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        es: "Which farming system left only one third of the land fallow?",
+        ua: "Яка система залишала лише третину землі під паром?",
+        opciones: [
+            { es: "Fixed fallow", ua: "Постійний пар" },
+            { es: "Three-field rotation", ua: "Трипільна сівозміна" }, // ✔
+            { es: "Four-field rotation", ua: "Чотирипільна сівозміна" }
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        es: "Which crops were introduced by Muslims in the Mediterranean?",
+        ua: "Які культури запровадили мусульмани в Середземномор’ї?",
+        opciones: [
+            { es: "Citrus fruits and rice", ua: "Цитрусові та рис" }, // ✔
+            { es: "Wheat and maize", ua: "Пшениця та кукурудза" },
+            { es: "Vine and olive", ua: "Виноград і олива" }
+        ],
+        correcta: 0
+    },
+    {
+        tipo: "multi",
+        es: "Which invention saved labour?",
+        ua: "Який винахід зменшив потребу в робочій силі?",
+        opciones: [
+            { es: "Grain silos", ua: "Зернові силоси" },
+            { es: "Water and wind mills", ua: "Водяні та вітряні млини" }, // ✔
+            { es: "Double ploughs", ua: "Подвійні плуги" }
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        es: "What increased thanks to agricultural growth?",
+        ua: "Що зросло завдяки розвитку сільського господарства?",
+        opciones: [
+            { es: "Total deforestation", ua: "Повна вирубка лісів" },
+            { es: "The European population", ua: "Населення Європи" }, // ✔
+            { es: "Slavery", ua: "Рабство" }
+        ],
+        correcta: 1
+    },
+    {
+        tipo: "multi",
+        es: "Where did merchants gather?",
+        ua: "Де збиралися купці?",
+        opciones: [
+            { es: "In castles", ua: "У замках" },
+            { es: "In military ports", ua: "У військових портах" },
+            { es: "At fairs", ua: "На ярмарках" } // ✔
+        ],
+        correcta: 2
+    },
+    {
+        tipo: "multi",
+        es: "What gave rise to medieval banking?",
+        ua: "Що стало основою середньовічної банківської справи?",
+        opciones: [
+            { es: "Currency exchange", ua: "Обмін валют" }, // ✔
+            { es: "Taxes", ua: "Податки" },
+            { es: "Three-field rotation", ua: "Трипільна система" }
+        ],
+        correcta: 0
+    },
+    {
+        tipo: "multi",
+        es: "Which document replaced many coin transactions?",
+        ua: "Який документ замінив багато операцій із монетами?",
+        opciones: [
+            { es: "Codices", ua: "Кодекси" },
+            { es: "Feudal charters", ua: "Феодальні грамоти" },
+            { es: "Bills of exchange", ua: "Переказні векселі" } // ✔
+        ],
+        correcta: 2
+    },
+    {
+        tipo: "multi",
+        es: "Which routes were important in medieval trade?",
+        ua: "Які торговельні маршрути були важливими?",
+        opciones: [
+            { es: "Caribbean and Indian Ocean", ua: "Карибський та Індійський" },
+            { es: "Black Sea and Caspian Sea", ua: "Чорне й Каспійське моря" },
+            { es: "Mediterranean and Atlantic–Baltic", ua: "Середземноморський і Атлантично-Балтійський" } // ✔
+        ],
+        correcta: 2
+    },
+    {
+        tipo: "multi",
+        es: "Which activity grew along with the population?",
+        ua: "Яка діяльність зросла разом із населенням?",
+        opciones: [
+            { es: "Craft production", ua: "Ремісниче виробництво" }, // ✔
+            { es: "Mining", ua: "Гірництво" },
+            { es: "Shipbuilding", ua: "Суднобудування" }
+        ],
+        correcta: 0
+    },
+
+    // SHORT ANSWERS
+    {
+        tipo: "corta",
+        es: "Write the name of the new plough.",
+        ua: "Напиши назву нового плуга.",
+        respuesta: "mouldboard plough"
+    },
+    {
+        tipo: "corta",
+        es: "What were the large markets called?",
+        ua: "Як називаються великі ринки?",
+        respuesta: "fairs"
+    },
+    {
+        tipo: "corta",
+        es: "Which financial document appeared in the 14th century?",
+        ua: "Який фінансовий документ з’явився у XIV ст.?",
+        respuesta: "bills of exchange"
+    },
+    {
+        tipo: "corta",
+        es: "Which farming system had three parts?",
+        ua: "Яка система складалася з трьох частин?",
+        respuesta: "three-field rotation"
+    },
+    {
+        tipo: "corta",
+        es: "Who carried out currency exchange?",
+        ua: "Хто здійснював обмін монет?",
+        respuesta: "money changer"
+    }
+];
+
+// -----------------------------
+// LOGIC: RANDOM ORDER
+// -----------------------------
+let orden = [...preguntas.keys()];
+
+// Fisher-Yates shuffle
+function barajar(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+}
+barajar(orden);
+
+let indice = 0;
+let respuestasUsuario = new Array(preguntas.length).fill(null);
+
+function actualizarProgreso() {
+    const barra = document.getElementById("progress-bar");
+    const label = document.getElementById("progress-label");
+    const porcentaje = ((indice + 1) / preguntas.length) * 100;
+    barra.style.width = porcentaje + "%";
+    label.textContent = `Question ${indice + 1} of ${preguntas.length}`;
+}
+
+function renderPregunta() {
+    const cont = document.getElementById("question-container");
+    const idxPregunta = orden[indice];
+    const q = preguntas[idxPregunta];
+
+    actualizarProgreso();
+
+    let html = `
+        <div class="question-text">
+            <span class="q-es">${q.es}</span>
+            <span class="q-ua">${q.ua}</span>
+        </div>
+    `;
+
+    if (q.tipo === "multi") {
+        html += `<div class="options">`;
+        const respGuardada = respuestasUsuario[idxPregunta];
+        q.opciones.forEach((op, iOp) => {
+            const checked = respGuardada === iOp ? "checked" : "";
+            html += `
+                <label class="option">
+                    <input type="radio" name="resp" value="${iOp}" ${checked}>
+                    <div class="option-text">
+                        <span class="es">${op.es}</span>
+                        <span class="ua">${op.ua}</span>
+                    </div>
+                </label>
+            `;
+        });
+        html += `</div>`;
+    } else {
+        const valor = respuestasUsuario[idxPregunta] ?? "";
+        html += `
+            <input
+                id="short-answer"
+                class="short-answer"
+                type="text"
+                value="${valor}"
+                placeholder="Write your answer · Напиши відповідь"
+            >
+            <div class="hint">1–2 words are enough · 1–2 слова достатньо</div>
+        `;
+    }
+
+    html += `
+        <div class="nav-row">
+            <button class="btn btn-ghost" onclick="anterior()" ${indice === 0 ? "disabled" : ""}>
+                ◀ Back
+            </button>
+            <button class="btn btn-primary" onclick="siguiente()">
+                ${indice === preguntas.length - 1 ? "Finish test" : "Next ▶"}
+            </button>
+        </div>
+    `;
+
+    cont.innerHTML = html;
+}
+
+function guardarRespuestaActual() {
+    const idxPregunta = orden[indice];
+    const q = preguntas[idxPregunta];
+
+    if (q.tipo === "multi") {
+        const marcada = document.querySelector("input[name='resp']:checked");
+        if (!marcada) return false;
+        respuestasUsuario[idxPregunta] = parseInt(marcada.value);
+        return true;
+    } else {
+        const input = document.getElementById("short-answer");
+        if (!input) return false;
+        const valor = input.value.trim();
+        if (valor === "") return false;
+        respuestasUsuario[idxPregunta] = valor;
+        return true;
+    }
+}
+
+function siguiente() {
+    if (!guardarRespuestaActual()) {
+        return;
+    }
+    indice++;
+    if (indice >= preguntas.length) {
+        mostrarResultados();
+    } else {
+        renderPregunta();
+    }
+}
+
+function anterior() {
+    if (indice === 0) return;
+    indice--;
+    renderPregunta();
+}
+
+function mostrarResultados() {
+    const testCard = document.getElementById("test-card");
+    const resultCard = document.getElementById("result-card");
+    const resultContent = document.getElementById("result-content");
+
+    testCard.classList.add("hidden");
+    resultCard.classList.remove("hidden");
+
+    let correctas = 0;
+    const fallos = [];
+
+    preguntas.forEach((q, idx) => {
+        const resp = respuestasUsuario[idx];
+        if (resp === null) {
+            fallos.push(q);
+            return;
+        }
+        if (q.tipo === "multi") {
+            if (resp === q.correcta) correctas++;
+            else fallos.push(q);
+        } else {
+            const esperado = q.respuesta.toLowerCase().trim();
+            const dado = String(resp).toLowerCase().trim();
+            if (dado === esperado) correctas++;
+            else fallos.push(q);
+        }
+    });
+
+    const total = preguntas.length;
+    const errores = total - correctas;
+
+    let html = `
+        <h2>Test results</h2>
+        <div class="summary">
+            ✅ Correct: <strong>${correctas}</strong><br>
+            ❌ Incorrect: <strong>${errores}</strong>
+        </div>
+    `;
+
+    if (fallos.length > 0) {
+        html += `<div class="summary" style="margin-top:10px;">
+            Questions you should review:
+        </div>
+        <ul class="list-fails">
+        `;
+        fallos.forEach(q => {
+            html += `
+                <li>
+                    <span class="es">${q.es}</span>
+                    <span class="ua">${q.ua}</span>
+                </li>
+            `;
+        });
+        html += `</ul>`;
+    }
+
+    html += `
+        <div class="retry-row">
+            <button class="btn btn-primary" onclick="location.reload()">
+                🔁 Take the test again
+            </button>
+        </div>
+    `;
+
+    resultContent.innerHTML = html;
+}
+
+// Start
+renderPregunta();
+</script>
+</body>
+</html>
